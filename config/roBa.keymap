@@ -20,6 +20,7 @@
 #define SCROLL 6
 
 // --- moNa2 スタイルの mt/lt 設定 ---
+
 &mt {
     flavor = "tap-preferred";
     quick-tap-ms = <0>;
@@ -33,6 +34,7 @@
 };
 
 // --- roBa trackball 設定 (ハード依存、変更不可) ---
+
 &trackball {
     automouse-layer = <MOUSE>;
     scroll-layers = <SCROLL>;
@@ -40,6 +42,7 @@
 
 / {
     // --- moNa2 マクロ ---
+
     macros {
         lang1_exit: lang1_exit {
             compatible = "zmk,behavior-macro";
@@ -60,36 +63,42 @@
         compatible = "zmk,combos";
 
         // 下矢印: 右手中段 N + M (roBa pos 30,31)
+
         shita {
             bindings = <&kp DOWN>;
             key-positions = <30 31>;
         };
 
         // 上矢印: 右手上段 Y + U (roBa pos 5,6)
+
         ue {
             bindings = <&kp UP_ARROW>;
             key-positions = <5 6>;
         };
 
         // Ctrl+Z: 左親指外 + H (roBa pos 39,17)
+
         ctrlz {
             bindings = <&kp LC(Z)>;
             key-positions = <39 17>;
         };
 
         // Escape: 左親指2つ (roBa pos 38,39)
+
         escape {
             bindings = <&kp ESCAPE>;
             key-positions = <38 39>;
         };
 
         // LANG2 (英数): 左手中段 D + F (roBa pos 12,13)
+
         combo_lang2 {
             bindings = <&kp LANG2>;
             key-positions = <13 12>;
         };
 
         // LANG1 (かな): 右手中段 J + H (roBa pos 18,17)
+
         combo_lang1 {
             bindings = <&kp LANG1>;
             key-positions = <18 17>;
@@ -97,6 +106,7 @@
         };
 
         // LANG1 + layer 0 復帰: MOUSE layer 時
+
         combo_lang1_mouse {
             bindings = <&lang1_exit>;
             key-positions = <18 17>;
@@ -105,12 +115,14 @@
     };
 
     // --- moNa2 スタイルの sensor behaviors ---
+
     behaviors {
         scroll_up_down: mouse_wheel_up_down {
             compatible = "zmk,behavior-sensor-rotate";
             label = "SCROLL_UP_DOWN";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+
             tap-ms = <40>;
         };
 
@@ -119,6 +131,7 @@
             label = "SCROLL_RIGHT_LEFT";
             #sensor-binding-cells = <0>;
             bindings = <&msc SCRL_LEFT>, <&msc SCRL_RIGHT>;
+
             tap-ms = <40>;
         };
 
@@ -127,6 +140,7 @@
             label = "CTRL_ZOOM";
             #sensor-binding-cells = <0>;
             bindings = <&kp LC(MINUS)>, <&kp LC(EQUAL)>;
+
             tap-ms = <40>;
         };
     };
@@ -145,84 +159,91 @@
         compatible = "zmk,keymap";
 
         // Layer 0: Default (moNa2 default_layer)
+
         default_layer {
             bindings = <
-&kp Q      &kp W   &kp E         &kp R                 &kp LBKT                                    &kp T  &kp Y  &kp U  &kp I  &kp P
-&kp A      &kp S   &kp D         &kp F                 &kp MINUS    &kp TAB         &kp DELETE     &kp G  &kp H  &kp J  &kp K  &kp O
-&kp Z      &kp X   &kp C         &kp V                 &kp SQT      &kp LEFT_WIN    &kp RSHFT      &kp B  &kp N  &kp M  &kp L  &kp RSHFT
-&kp LCTRL  &trans  &kp LEFT_ALT  &mt LEFT_SHIFT COMMA  &lt 3 SPACE  &lt 2 PERIOD    &kp BACKSPACE  &mo 1                       &kp ENTER
+&kp Q      &kp W   &kp E         &kp R                 &kp LBKT                                      &kp T  &kp Y  &kp U  &kp I  &kp P
+&kp A      &kp S   &kp D         &kp F                 &kp MINUS    &none             &kp LEFT_WIN   &kp G  &kp H  &kp J  &kp K  &kp O
+&kp Z      &kp X   &kp C         &kp V                 &kp SQT      &kp TAB           &kp DELETE     &kp B  &kp N  &kp M  &kp L  &kp RSHFT
+&kp LCTRL  &trans  &kp LEFT_ALT  &mt LEFT_SHIFT COMMA  &lt 3 SPACE  &lt 2 PERIOD      &kp BACKSPACE  &mo 1                       &kp ENTER
             >;
 
             sensor-bindings = <&scroll_up_down>;
         };
 
         // Layer 1: 数字 (moNa2 layer_1 — 右手テンキー)
+
         layer_1 {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                       &kp LS(MINUS)         &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp PERCENT
-&trans  &trans  &trans  &trans  &trans  &trans    &kp MINUS  &kp LS(SINGLE_QUOTE)  &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp N0
-&trans  &trans  &trans  &trans  &trans  &trans    &trans     &kp SLASH             &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp COMMA
-&trans  &trans  &trans  &trans  &trans  &trans    &trans     &trans                                                          &trans
+&trans  &trans  &trans  &trans  &trans                         &kp LS(MINUS)         &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp PERCENT
+&trans  &trans  &trans  &trans  &trans  &trans      &kp MINUS  &kp LS(SINGLE_QUOTE)  &kp NUMBER_4  &kp N5        &kp NUMBER_6  &kp N0
+&trans  &trans  &trans  &trans  &trans  &trans      &trans     &kp SLASH             &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp COMMA
+&trans  &trans  &trans  &trans  &trans  &trans      &trans     &trans                                                          &trans
             >;
 
             sensor-bindings = <&scroll_up_down>;
         };
 
         // Layer 2: ツール (moNa2 layer_2 — Alt+数字, Ctrl+ショートカット)
+
         layer_2 {
             bindings = <
-&trans  &trans            &trans         &trans            &kp LC(COLON)                    &trans  &trans  &trans  &trans  &trans
-&trans  &kp LA(NUMBER_2)  &kp LC(LS(L))  &kp LA(NUMBER_1)  &kp LC(MINUS)  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans            &trans         &trans            &trans         &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans            &trans         &trans            &trans         &trans    &trans  &trans                          &trans
+&trans  &trans            &trans         &trans            &kp LC(COLON)                      &trans  &trans  &trans  &trans  &trans
+&trans  &kp LA(NUMBER_2)  &kp LC(LS(L))  &kp LA(NUMBER_1)  &kp LC(MINUS)  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans            &trans         &trans            &trans         &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans            &trans         &trans            &trans         &trans      &trans  &trans                          &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_DOWN C_VOLUME_UP>;
         };
 
         // Layer 3: ナビ+記号 (moNa2 layer_3 — 矢印、記号、コピペ)
+
         layer_3 {
             bindings = <
-&trans     &kp LS(N2)  &kp SQT          &kp LC(LS(V))  &kp LESS_THAN                                     &trans            &trans          &kp UP_ARROW    &trans           &trans
-&kp LC(A)  &kp LS(N6)  &kp EXCLAMATION  &kp QUESTION   &kp LS(INT1)    &kp PRINTSCREEN    &trans          &trans            &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
-&trans     &kp SQT     &kp LC(C)        &kp LC(V)      &kp SQT         &trans             &trans          &trans            &kp LS(N8)      &kp LS(N9)      &trans           &trans
-&trans     &trans      &trans           &trans         &trans          &trans             &kp MINUS       &kp GREATER_THAN                                                   &trans
+&trans     &kp LS(N2)  &kp SQT          &kp LC(LS(V))  &kp LESS_THAN                                  &trans            &trans          &kp UP_ARROW    &trans           &trans
+&kp LC(A)  &kp LS(N6)  &kp EXCLAMATION  &kp QUESTION   &kp LS(INT1)   &kp PRINTSCREEN      &trans     &trans            &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans
+&trans     &kp SQT     &kp LC(C)        &kp LC(V)      &kp SQT        &trans               &trans     &trans            &kp LS(N8)      &kp LS(N9)      &trans           &trans
+&trans     &trans      &trans           &trans         &trans         &trans               &kp MINUS  &kp GREATER_THAN                                                   &trans
             >;
 
             sensor-bindings = <&scroll_right_left>;
         };
 
         // Layer 4: BT設定 (moNa2 layer_4)
+
         layer_4 {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                         &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
-&trans  &trans  &trans  &trans  &trans  &trans    &bootloader  &trans        &trans        &trans        &trans        &bt BT_CLR
-&trans  &trans  &trans  &trans  &trans  &trans    &trans       &trans        &trans        &trans        &trans        &bt BT_CLR_ALL
-&trans  &trans  &trans  &trans  &trans  &trans    &trans       &trans                                                  &trans
+&trans  &trans  &trans  &trans  &trans                           &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+&trans  &trans  &trans  &trans  &trans  &trans      &bootloader  &trans        &trans        &trans        &trans        &bt BT_CLR
+&trans  &trans  &trans  &trans  &trans  &trans      &trans       &trans        &trans        &trans        &trans        &bt BT_CLR_ALL
+&trans  &trans  &trans  &trans  &trans  &trans      &trans       &trans                                                  &trans
             >;
 
             sensor-bindings = <&scroll_up_down>;
         };
 
         // Layer 5: MOUSE (automouse layer — trackball 操作時に自動切替)
+
         MOUSE {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans    &trans    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &mkp MB1  &mkp MB2  &trans  &mo 6
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans    &trans    &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans                              &trans
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans    &trans    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB2  &trans  &mo 6
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans    &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                              &trans
             >;
 
             sensor-bindings = <&scroll_up_down>;
         };
 
         // Layer 6: SCROLL (MOUSE layer から mo で切替)
+
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans  &trans                    &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans                          &trans
+&trans  &trans  &trans  &trans  &trans                      &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
             >;
 
             sensor-bindings = <&scroll_up_down>;
